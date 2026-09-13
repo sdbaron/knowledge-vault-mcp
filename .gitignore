@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.knowledge-vault/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true,
+    "module": "ESNext",
+    "types": ["node", "jest"],
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@knowledge-vault/indexer": ["../knowledge-vault-indexer/src/index.ts"]
+    }
+  },
+  "include": ["src", "tests"]
+}
