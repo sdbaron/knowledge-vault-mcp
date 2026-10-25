@@ -1,8 +1,11 @@
 {
-  "name": "@knowledge-vault/indexer",
+  "name": "@sdbaron/knowledge-vault-indexer",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "files": ["dist"],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -14,13 +17,22 @@
       "default": "./dist/index.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdbaron/knowledge-vault-mcp.git",
+    "directory": "packages/knowledge-vault-indexer"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "scripts": {
     "build": "node -e \"const fs=require('node:fs'); fs.rmSync('dist',{recursive:true,force:true}); fs.rmSync('tsconfig.tsbuildinfo',{force:true});\" && tsc -p tsconfig.json",
     "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "reindex": "node dist/cli.js reindex"
   },
   "dependencies": {
-    "@knowledge-vault/contract": "workspace:*"
+    "@sdbaron/knowledge-vault-contract": "workspace:*"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

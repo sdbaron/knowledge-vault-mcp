@@ -1,5 +1,5 @@
-export type { VaultFrontmatter as WikiFrontmatter } from "@knowledge-vault/contract";
-import type { VaultFrontmatter } from "@knowledge-vault/contract";
+export type { VaultFrontmatter as WikiFrontmatter } from "@sdbaron/knowledge-vault-contract";
+import type { VaultFrontmatter } from "@sdbaron/knowledge-vault-contract";
 
 export interface WikiSection {
   heading: string;

@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import { describe, expect, it } from "@jest/globals";
-import { runFullReindex } from "@knowledge-vault/indexer";
+import { runFullReindex } from "@sdbaron/knowledge-vault-indexer";
 
 import { KnowledgeVaultMcpServer } from "../src/server.js";
 import { isNodeSqliteAvailable } from "../src/sqliteRuntime.js";

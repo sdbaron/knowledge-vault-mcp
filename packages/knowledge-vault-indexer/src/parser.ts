@@ -1,5 +1,5 @@
 import { sha256 } from "./hash.js";
-import { validateVaultFrontmatter } from "@knowledge-vault/contract";
+import { validateVaultFrontmatter } from "@sdbaron/knowledge-vault-contract";
 import type { ParsedWikiNote, WikiFrontmatter, WikiSection } from "./types.js";
 
 interface FrontmatterExtraction {

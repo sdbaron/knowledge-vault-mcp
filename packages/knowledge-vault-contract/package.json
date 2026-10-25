@@ -1,8 +1,11 @@
 {
-  "name": "@knowledge-vault/contract",
+  "name": "@sdbaron/knowledge-vault-contract",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "files": ["dist"],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -10,6 +13,15 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdbaron/knowledge-vault-mcp.git",
+    "directory": "packages/knowledge-vault-contract"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
