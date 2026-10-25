@@ -1,4 +1,4 @@
-import { runFullReindex } from "@knowledge-vault/indexer";
+import { runFullReindex } from "@sdbaron/knowledge-vault-indexer";
 
 import { VaultRepository } from "./repository.js";
 import type {

@@ -9,7 +9,7 @@ const config: Config = {
   },
   testPathIgnorePatterns: ["/dist/"],
   moduleNameMapper: {
-    "^@knowledge-vault/indexer$":
+    "^@sdbaron/knowledge-vault-indexer$":
       "<rootDir>/../knowledge-vault-indexer/src/index.ts",
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },

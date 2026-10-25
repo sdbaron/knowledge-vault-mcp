@@ -94,14 +94,14 @@ mkdirSync(dirname(dbPath), { recursive: true });
 
 if (!existsSync(indexerCli)) {
   process.stderr.write(
-    "[start-knowledge-vault-mcp] Building @knowledge-vault/indexer…\n",
+    "[start-knowledge-vault-mcp] Building @sdbaron/knowledge-vault-indexer…\n",
   );
   run("pnpm", ["-C", "packages/knowledge-vault-indexer", "build"]);
 }
 
 if (!existsSync(mcpCli)) {
   process.stderr.write(
-    "[start-knowledge-vault-mcp] Building @knowledge-vault/mcp…\n",
+    "[start-knowledge-vault-mcp] Building @sdbaron/knowledge-vault-mcp…\n",
   );
   run("pnpm", ["-C", "packages/knowledge-vault-mcp", "build"]);
 }

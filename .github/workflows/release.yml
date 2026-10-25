@@ -1,0 +1,86 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build, test, and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+        # Version comes from package.json "packageManager" (pnpm@10.33.4).
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: "@sdbaron"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Require tag to match every package version
+        run: |
+          node --input-type=module <<'EOF'
+          import { readdirSync, readFileSync } from "node:fs";
+
+          const ref = process.env.GITHUB_REF_NAME ?? "";
+          const tag = ref.replace(/^v/, "");
+          if (!ref.startsWith("v") || tag.length === 0) {
+            console.error(`Ref ${ref} is not a v* tag`);
+            process.exit(1);
+          }
+
+          const mismatches = [];
+          for (const dir of readdirSync("packages")) {
+            const manifest = JSON.parse(
+              readFileSync(`packages/${dir}/package.json`, "utf8"),
+            );
+            if (manifest.private === true) continue;
+            if (manifest.version !== tag) {
+              mismatches.push(
+                `${manifest.name} is ${manifest.version}, tag is ${tag}`,
+              );
+            } else {
+              console.log(`${manifest.name}@${manifest.version}`);
+            }
+          }
+
+          if (mismatches.length > 0) {
+            console.error(mismatches.join("\n"));
+            console.error(
+              "Bump all three package versions to the tag (without the leading v) before publishing.",
+            );
+            process.exit(1);
+          }
+          EOF
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Publish to GitHub Packages
+        # pnpm publish rewrites workspace:* to the dependency's exact version
+        # (workspace:^ would become ^version). Packages publish in dependency order.
+        run: pnpm -r publish --no-git-checks --access restricted
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

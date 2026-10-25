@@ -56,7 +56,7 @@ importers:
 
   packages/knowledge-vault-indexer:
     dependencies:
-      '@knowledge-vault/contract':
+      '@sdbaron/knowledge-vault-contract':
         specifier: workspace:*
         version: link:../knowledge-vault-contract
     devDependencies:
@@ -81,7 +81,7 @@ importers:
 
   packages/knowledge-vault-mcp:
     dependencies:
-      '@knowledge-vault/indexer':
+      '@sdbaron/knowledge-vault-indexer':
         specifier: workspace:*
         version: link:../knowledge-vault-indexer
     devDependencies:
