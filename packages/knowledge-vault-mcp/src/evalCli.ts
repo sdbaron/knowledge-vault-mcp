@@ -132,7 +132,7 @@ async function ensureParentDir(filePath: string): Promise<void> {
 
 function printUsage(): void {
   console.log(`Verwendung:
-  wiki-eval --cases <path> --db <path> --vault <path> [Optionen]
+  knowledge-vault-eval --cases <path> --db <path> --vault <path> [Optionen]
 
 Optionen:
   --suite examples|production-vault|all   Nur Cases dieser Suite (Default: all)
@@ -147,12 +147,12 @@ Optionen:
 
 Beispiel:
   pnpm -C packages/knowledge-vault-mcp eval -- \\
-    --cases docs/wiki-llm-obsidian/eval/cases.json \\
+    --cases examples/eval/cases.json \\
     --suite examples \\
     --vault examples/vault \\
     --db .knowledge-vault/index.sqlite \\
     --reindex --k 10 \\
-    --out docs/wiki-llm-obsidian/eval/results/run-examples.json
+    --out examples/eval/results/run-examples.json
 `);
 }
 
