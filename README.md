@@ -47,7 +47,7 @@ frontmatter. Extra fields, including source metadata emitted by ebook-ingest, ar
 
 Packages are published to `https://npm.pkg.github.com` under the `sdbaron` owner. The scope has to match that owner, which is why the names are `@sdbaron/*` and not `@knowledge-vault/*`.
 
-Inside this repo, dependencies stay `workspace:*`. `pnpm publish` rewrites that protocol when it packs: `workspace:*` becomes the dependency's exact version (`0.1.0`), and `workspace:^` would become `^0.1.0`. Publishing is in dependency order (contract, then indexer, then mcp), so the rewritten ranges exist on the registry before a dependent is published.
+Indexer depends on `@sdbaron/knowledge-vault-contract` with `workspace:0.1.1`, and the MCP package depends on the indexer the same way. pnpm links those workspace copies locally. On publish, `workspace:0.1.1` is written as the exact version `0.1.1`. Publishing is in dependency order (contract, then indexer, then mcp). Each package `exports` map includes `"./package.json"` so `require.resolve("@sdbaron/knowledge-vault-indexer/package.json")` works for consumers.
 
 A release is a git tag `vX.Y.Z` whose version matches `version` in all three package manifests (the leading `v` is stripped). Pushing that tag runs `.github/workflows/release.yml`, which installs, checks the version, builds, tests, and publishes with `GITHUB_TOKEN` (`packages: write`). Do not publish by hand from a laptop unless you intend to.
 
@@ -65,7 +65,7 @@ In the consuming project (for example SergeyLC/Tagesberichte), add an `.npmrc`:
 ```json
 {
   "dependencies": {
-    "@sdbaron/knowledge-vault-mcp": "0.1.0"
+    "@sdbaron/knowledge-vault-mcp": "0.1.1"
   }
 }
 ```
