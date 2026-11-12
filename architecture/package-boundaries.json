@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "description": "Allowed dependency edges between knowledge-vault packages. Consumers live outside this repo.",
+  "packages": {
+    "@sdbaron/knowledge-vault-contract": {
+      "directory": "packages/knowledge-vault-contract",
+      "allowedDependencies": [],
+      "forbiddenDependencies": [
+        "@sdbaron/knowledge-vault-indexer",
+        "@sdbaron/knowledge-vault-mcp"
+      ],
+      "responsibilities": [
+        "frontmatter types",
+        "frontmatter validation"
+      ],
+      "forbiddenResponsibilities": [
+        "filesystem i/o",
+        "sqlite",
+        "mcp protocol",
+        "retrieval",
+        "cli"
+      ]
+    },
+    "@sdbaron/knowledge-vault-indexer": {
+      "directory": "packages/knowledge-vault-indexer",
+      "allowedDependencies": ["@sdbaron/knowledge-vault-contract"],
+      "forbiddenDependencies": ["@sdbaron/knowledge-vault-mcp"],
+      "responsibilities": [
+        "markdown discovery",
+        "frontmatter and body parsing",
+        "section chunking",
+        "sqlite schema and upserts",
+        "reindex cli"
+      ],
+      "forbiddenResponsibilities": [
+        "mcp framing",
+        "json-rpc",
+        "agent search scoring"
+      ]
+    },
+    "@sdbaron/knowledge-vault-mcp": {
+      "directory": "packages/knowledge-vault-mcp",
+      "allowedDependencies": ["@sdbaron/knowledge-vault-indexer"],
+      "forbiddenDependencies": [],
+      "responsibilities": [
+        "mcp stdio transport",
+        "vault_* tools",
+        "sqlite-backed retrieval",
+        "eval cli"
+      ],
+      "forbiddenResponsibilities": [
+        "frontmatter schema ownership",
+        "markdown parser ownership"
+      ]
+    }
+  },
+  "importRules": {
+    "crossPackageMustUsePackageName": true,
+    "forbidRelativeImportsAcrossPackages": true,
+    "forbidDeepImportsIntoOtherPackageSrc": true,
+    "requiredExports": [".", "./package.json"]
+  }
+}
