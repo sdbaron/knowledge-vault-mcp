@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "description": "Supported public entrypoints for published packages. Prefer importing from the package root.",
+  "packages": {
+    "@sdbaron/knowledge-vault-contract": {
+      "exports": {
+        ".": {
+          "types": [
+            "VaultFrontmatter",
+            "FrontmatterValidationResult"
+          ],
+          "values": ["validateVaultFrontmatter"]
+        },
+        "./package.json": {
+          "values": ["package.json"]
+        }
+      },
+      "bin": {}
+    },
+    "@sdbaron/knowledge-vault-indexer": {
+      "exports": {
+        ".": {
+          "types": [
+            "ChunkRecord",
+            "IndexError",
+            "IndexRunSummary",
+            "ParsedWikiNote",
+            "ReindexOptions",
+            "WikiFrontmatter",
+            "WikiSection"
+          ],
+          "values": [
+            "buildChunks",
+            "runFullReindex",
+            "extractWikiLinks",
+            "parseWikiNote",
+            "SqliteWikiStore"
+          ]
+        },
+        "./package.json": {
+          "values": ["package.json"]
+        }
+      },
+      "bin": {
+        "knowledge-vault-indexer": "dist/cli.js"
+      }
+    },
+    "@sdbaron/knowledge-vault-mcp": {
+      "exports": {
+        ".": {
+          "types": [
+            "BacklinkItem",
+            "BacklinksParams",
+            "GetNoteParams",
+            "JsonRpcRequest",
+            "JsonRpcResponse",
+            "McpServerOptions",
+            "McpTool",
+            "NoteResponse",
+            "ReindexParams",
+            "SearchParams",
+            "SearchResultItem",
+            "EvalCase",
+            "EvalCaseResult",
+            "EvalReport",
+            "EvalRunOptions",
+            "EvalSuite",
+            "MetricSummary"
+          ],
+          "values": [
+            "KnowledgeVaultMcpServer",
+            "executeTool",
+            "VAULT_TOOLS",
+            "VaultRepository",
+            "createDatabaseConnection",
+            "isNodeSqliteAvailable",
+            "runEval",
+            "parseSuite",
+            "loadCases",
+            "filterCasesBySuite",
+            "uniqueNotePaths",
+            "hitAtRank",
+            "reciprocalRank",
+            "summarizeCaseResults",
+            "normalizeEvalK",
+            "formatReportJson",
+            "formatReportMarkdown"
+          ]
+        },
+        "./package.json": {
+          "values": ["package.json"]
+        }
+      },
+      "bin": {
+        "knowledge-vault-mcp": "dist/cli.js",
+        "knowledge-vault-eval": "dist/evalCli.js"
+      },
+      "mcpTools": [
+        "vault_search",
+        "vault_get_note",
+        "vault_backlinks",
+        "vault_reindex"
+      ]
+    }
+  }
+}

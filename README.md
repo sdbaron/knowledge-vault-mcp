@@ -4,6 +4,8 @@ Portable local knowledge-base infrastructure for Markdown and Obsidian vaults.
 
 Requires Node.js 22 or newer because the SQLite index uses the built-in `node:sqlite` module.
 
+Agents and contributors: start at [AGENTS.md](AGENTS.md). Architecture docs live under [docs/architecture/](docs/architecture/), decisions under [docs/decisions/](docs/decisions/), and machine-readable boundaries under [architecture/](architecture/).
+
 It contains three workspace packages, published to GitHub Packages as:
 
 - `@sdbaron/knowledge-vault-contract` — portable frontmatter contract and validation.
